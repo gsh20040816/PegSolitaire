@@ -127,7 +127,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ChessBoard.cpp" />
     <ClCompile Include="PegSolitaire.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ChessBoard.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Cases\1.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
