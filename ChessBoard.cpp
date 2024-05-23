@@ -36,9 +36,34 @@ void chessBoard::printBoard()
 		{
 			bool flag = false;
 			for (int j = 0; j < size; j++)
+				if (board[i][j] != -1)
+					flag = true;
+			if (!flag)
+				break;
+			flag = false;
+			for (int j = 0; j < size; j++)
 			{
-				if(board[i][j])
+				if (board[i][j] != -1)
+				{
+					flag = true;
+					if (board[i][j] == 1)
+						cout << "■";
+					else
+						cout << "□";
+				}
+				else
+				{
+					if (flag)
+						break;
+					cout << " ";
+				}
 			}
+			cout << endl;
 		}
 	}
+}
+
+void moveChess(int startX, int startY, int endX, int endY)
+{
+
 }
