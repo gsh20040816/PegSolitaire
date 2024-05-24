@@ -1,7 +1,7 @@
-﻿#include"ChessBoard.h"
+﻿#include"MainWindow.h"
 
 int main()
 {
-    chessBoard game(1);
-    game.printBoard();
+    startGame();
+    return 0;
 }

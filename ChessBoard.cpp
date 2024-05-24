@@ -70,7 +70,7 @@ bool chessBoard::moveChess(int startX, int startY, int endX, int endY)
 	if (board[startX][startY] != 1 || board[endX][endY] != 1)return false;
 	int direction = checkDirection(startX, startY, endX, endY);
 	if (direction == -1)return false;
-	auto nextPlace = getNextPlace(startX, startY, direction);
+	auto nextPlace = getNextPlace(endX, endY, direction);
 	int nextX = nextPlace.first, nextY = nextPlace.second;
 	if (nextX < 0 || nextX >= size || nextY < 0 || nextY >= size)return false;
 	if (board[nextX][nextY] != 0)return false;

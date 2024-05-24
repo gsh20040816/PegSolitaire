@@ -128,10 +128,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ChessBoard.cpp" />
+    <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="PegSolitaire.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChessBoard.h" />
+    <ClInclude Include="MainWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Cases\1.txt" />
