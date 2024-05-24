@@ -1,4 +1,6 @@
 #pragma once
+#include<iostream>
+using std::pair;
 
 class chessBoard
 {
@@ -10,10 +12,17 @@ private:
 	const static int size = 20;
 	//0:空 1:非空 -1:不可达
 	int board[size][size];
+	//检查方向是否合法，以及判断下一步是哪个方向
+	//type:0
+	//0:左 1:上 2:右 3:下
+	//type:1
+	//0:左 1:左上 2:右上 3:右 4:右下 5:左下
+	int checkDirection(int startX, int startY, int endX, int endY);
+	pair<int, int>getNextPlace(int startX, int startY, int direction);
 
 public:
 	chessBoard(int type);
 	~chessBoard();
-	void printBoard();
-	void moveChess(int startX, int startY, int endX, int endY);
+	void printBoard();//打印棋盘
+	bool moveChess(int startX, int startY, int endX, int endY);//移动棋子并判断是否合法
 };

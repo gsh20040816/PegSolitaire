@@ -63,7 +63,61 @@ void chessBoard::printBoard()
 	}
 }
 
-void moveChess(int startX, int startY, int endX, int endY)
+bool chessBoard::moveChess(int startX, int startY, int endX, int endY)
 {
+	if (startX < 0 || startX >= size || startY < 0 || startY >= size)return false;
+	if (endX < 0 || endX >= size || endY < 0 || endY >= size)return false;
+	if (board[startX][startY] != 1 || board[endX][endY] != 1)return false;
+	int direction = checkDirection(startX, startY, endX, endY);
+	if (direction == -1)return false;
+	auto nextPlace = getNextPlace(startX, startY, direction);
+	int nextX = nextPlace.first, nextY = nextPlace.second;
+	if (nextX < 0 || nextX >= size || nextY < 0 || nextY >= size)return false;
+	if (board[nextX][nextY] != 0)return false;
+	board[startX][startY] = 0;
+	board[endX][endY] = 0;
+	board[nextX][nextY] = 1;
+	return true;
+}
 
+int chessBoard::checkDirection(int startX, int startY, int endX, int endY)
+{
+	if (type == 0)
+	{
+		int dis = abs(startX - endX) + abs(startY - endY);
+		if (dis != 1)return -1;
+		//0:左 1:上 2:右 3:下
+		if (startX == endX)
+		{
+			if (startY > endY)
+				return 0;
+			else
+				return 2;
+		}
+		else
+		{
+			if (startX > endX)
+				return 1;
+			else
+				return 3;
+		}
+		return -1;
+	}
+}
+
+pair<int, int>chessBoard::getNextPlace(int startX, int startY, int direction)
+{
+	if (type == 0)
+	{
+		//0:左 1:上 2:右 3:下
+		if (direction == 0)
+			return make_pair(startX, startY - 1);
+		if (direction == 1)
+			return make_pair(startX - 1, startY);
+		if (direction == 2)
+			return make_pair(startX, startY + 1);
+		if (direction == 3)
+			return make_pair(startX + 1, startY);
+		return make_pair(0, 0);
+	}
 }
