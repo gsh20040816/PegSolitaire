@@ -10,6 +10,7 @@ private:
 	//六边形棋盘使用偏移的二维数组存储
 	int type;
 	const static int size = 20;
+	int boardSize, width, height;
 	//0:空 1:非空 -1:不可达
 	int board[size][size];
 	//检查方向是否合法，以及判断下一步是哪个方向
@@ -21,8 +22,9 @@ private:
 	pair<int, int>getNextPlace(int startX, int startY, int direction);
 
 public:
-	chessBoard(int type);
+	chessBoard(int type, int width, int height);
 	~chessBoard();
 	void printBoard();//打印棋盘
 	bool moveChess(int startX, int startY, int endX, int endY);//移动棋子并判断是否合法
+	pair<pair<int, int>,pair<int,int>>getMouseMove();
 };
