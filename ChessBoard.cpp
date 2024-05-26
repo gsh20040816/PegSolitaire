@@ -7,14 +7,9 @@ using namespace std;
 
 chessBoard::chessBoard(int type, int width, int height)
 {
-	string filename = "Cases/" + to_string(type) + ".txt";
+	string filename = "Rounds/" + to_string(type) + ".txt";
 	ifstream fin;
 	fin.open(filename);
-	if (!fin.is_open())
-	{
-		cout << "找不到数据文件，请检查文件是否存在" << endl;
-		exit(0);
-	}
 	this->width = width;
 	this->height = height;
 	fin >> this->boardSize >> this->type;
@@ -35,9 +30,8 @@ void chessBoard::printBoard()
 	const int textX = width / 4, textY = (height - width) / 4;
 	const int textWidth = width / 2, textHeight = (height - width) / 2;
 
-	settextjustify(CENTER_TEXT, CENTER_TEXT);
-	setfont(textHeight / 3, 0, "黑体");
-	outtextrect(textX, textY, textWidth, textHeight, "欢迎来到孔明棋");
+	setfont(45, 0, "黑体");
+	outtextxy(150, 50, "欢迎来到孔明棋");
 	if (type == 0)
 	{
 		for (int i = 0; i < boardSize; i++)
@@ -193,20 +187,10 @@ int chessBoard::gameEnd()
 	}
 }
 
-void chessBoard::gameWin()
+void chessBoard::gameOver(char* msg)
 {
-	const int width0 = 400, height0 = 100;
-	const color_t backColor = RED;
-	setfont(height0 / 2, 0, "黑体");
-	settextjustify(CENTER_TEXT, CENTER_TEXT);
-	outtextrect(0, 0, width0, height0, "恭喜你，你赢了！按空格返回初始界面");
-}
-
-void chessBoard::gameLose()
-{
-	const int width0 = 400, height0 = 100;
-	const color_t backColor = RED;
-	setfont(height0 / 2, 0, "黑体");
-	settextjustify(CENTER_TEXT, CENTER_TEXT);
-	outtextrect(0, 0, width0, height0, "你输了！按空格返回初始界面");
+	const color_t backColor = GREEN;
+	setbkcolor(backColor);
+	setfont(45, 0, "黑体");
+	outtextxy(0, height/3, msg);
 }

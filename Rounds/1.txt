@@ -1,0 +1,6 @@
+101 Standard
+102 Square
+103 European
+104 Asymmetric
+105 German
+106 Diamond

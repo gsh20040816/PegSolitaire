@@ -2,7 +2,7 @@
 
 int main()
 {
-    initBoard();
-    startGame();
-    return 0;
+	initBoard();
+	startGame();
+	return 0;
 }

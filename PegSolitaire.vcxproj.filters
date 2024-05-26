@@ -13,7 +13,7 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="资源文件\Cases">
+    <Filter Include="资源文件\Rounds">
       <UniqueIdentifier>{821f492e-c7e5-448f-bb1d-5bb000572fc8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -37,8 +37,29 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Cases\1.txt">
-      <Filter>资源文件\Cases</Filter>
+    <Text Include="Rounds\101.txt">
+      <Filter>资源文件\Rounds</Filter>
+    </Text>
+    <Text Include="Rounds\1.txt">
+      <Filter>资源文件\Rounds</Filter>
+    </Text>
+    <Text Include="Rounds\102.txt">
+      <Filter>资源文件\Rounds</Filter>
+    </Text>
+    <Text Include="Rounds\103.txt">
+      <Filter>资源文件\Rounds</Filter>
+    </Text>
+    <Text Include="Rounds\104.txt">
+      <Filter>资源文件\Rounds</Filter>
+    </Text>
+    <Text Include="Rounds\105.txt">
+      <Filter>资源文件\Rounds</Filter>
+    </Text>
+    <Text Include="Rounds\106.txt">
+      <Filter>资源文件\Rounds</Filter>
+    </Text>
+    <Text Include="Rounds\2.txt">
+      <Filter>资源文件\Rounds</Filter>
     </Text>
   </ItemGroup>
 </Project>

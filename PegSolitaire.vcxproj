@@ -141,7 +141,14 @@
     <ClInclude Include="MainWindow.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Cases\1.txt" />
+    <Text Include="Rounds\1.txt" />
+    <Text Include="Rounds\101.txt" />
+    <Text Include="Rounds\102.txt" />
+    <Text Include="Rounds\103.txt" />
+    <Text Include="Rounds\104.txt" />
+    <Text Include="Rounds\105.txt" />
+    <Text Include="Rounds\106.txt" />
+    <Text Include="Rounds\2.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
