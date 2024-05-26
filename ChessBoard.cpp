@@ -67,16 +67,15 @@ bool chessBoard::moveChess(int startX, int startY, int endX, int endY)
 {
 	if (startX < 0 || startX >= size || startY < 0 || startY >= size)return false;
 	if (endX < 0 || endX >= size || endY < 0 || endY >= size)return false;
-	if (board[startX][startY] != 1 || board[endX][endY] != 1)return false;
+	if (board[startX][startY] != 1 || board[endX][endY] != 0)return false;
 	int direction = checkDirection(startX, startY, endX, endY);
 	if (direction == -1)return false;
-	auto nextPlace = getNextPlace(endX, endY, direction);
-	int nextX = nextPlace.first, nextY = nextPlace.second;
-	if (nextX < 0 || nextX >= size || nextY < 0 || nextY >= size)return false;
-	if (board[nextX][nextY] != 0)return false;
+	auto midPlace = getNextPlace(startX, startY, direction);
+	int midX = midPlace.first, midY = midPlace.second;
+	if (board[midX][midY] != 1)return false;
 	board[startX][startY] = 0;
-	board[endX][endY] = 0;
-	board[nextX][nextY] = 1;
+	board[midX][midY] = 0;
+	board[endX][endY] = 1;
 	return true;
 }
 
@@ -85,7 +84,8 @@ int chessBoard::checkDirection(int startX, int startY, int endX, int endY)
 	if (type == 0)
 	{
 		int dis = abs(startX - endX) + abs(startY - endY);
-		if (dis != 1)return -1;
+		if (dis != 2)return -1;
+		if (startX != endX && startY != endY)return -1;
 		//0:左 1:上 2:右 3:下
 		if (startX == endX)
 		{
