@@ -20,7 +20,17 @@ void startGame()
 			cleardevice();
 			board.printBoard();
 		}
+		int num = board.gameEnd();
+		if (num != -1)
+		{
+			if (num == 1)
+				board.gameWin();
+			else
+				board.gameLose();
+			break;
+		}
 	}
+	getch();
 }
 
 void initBoard()

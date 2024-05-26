@@ -162,3 +162,51 @@ pair<pair<int, int>, pair<int, int>>chessBoard::getMouseMove()
 	}
 	return make_pair(make_pair(startX, startY), make_pair(endX, endY));
 }
+
+int chessBoard::gameEnd()
+{
+	int num = 0;
+	for (int i = 0; i < boardSize; i++)
+		for (int j = 0; j < boardSize; j++)
+			if (board[i][j] == 1)
+				num++;
+	if (type == 0)
+	{
+		for (int i = 0; i < boardSize; i++)
+		{
+			for (int j = 0; j < boardSize; j++)
+			{
+				if (board[i][j] == 0)
+				{
+					if (i > 0 && board[i - 1][j] == 1 && i > 1 && board[i - 2][j] == 1)
+						return -1;
+					if (i < boardSize - 1 && board[i + 1][j] == 1 && i < boardSize - 2 && board[i + 2][j] == 1)
+						return -1;
+					if (j > 0 && board[i][j - 1] == 1 && j > 1 && board[i][j - 2] == 1)
+						return -1;
+					if (j < boardSize - 1 && board[i][j + 1] == 1 && j < boardSize - 2 && board[i][j + 2] == 1)
+						return -1;
+				}
+			}
+		}
+		return num;
+	}
+}
+
+void chessBoard::gameWin()
+{
+	const int width0 = 400, height0 = 100;
+	const color_t backColor = RED;
+	setfont(height0 / 2, 0, "黑体");
+	settextjustify(CENTER_TEXT, CENTER_TEXT);
+	outtextrect(0, 0, width0, height0, "恭喜你，你赢了！按空格返回初始界面");
+}
+
+void chessBoard::gameLose()
+{
+	const int width0 = 400, height0 = 100;
+	const color_t backColor = RED;
+	setfont(height0 / 2, 0, "黑体");
+	settextjustify(CENTER_TEXT, CENTER_TEXT);
+	outtextrect(0, 0, width0, height0, "你输了！按空格返回初始界面");
+}

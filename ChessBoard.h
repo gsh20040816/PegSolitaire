@@ -26,5 +26,8 @@ public:
 	~chessBoard();
 	void printBoard();//打印棋盘
 	bool moveChess(int startX, int startY, int endX, int endY);//移动棋子并判断是否合法
-	pair<pair<int, int>,pair<int,int>>getMouseMove();
+	pair<pair<int, int>,pair<int,int>>getMouseMove();//获取鼠标移动棋子信息
+	int gameEnd();//判断游戏是否结束，未结束返回-1，结束返回剩余棋子数
+	void gameWin();
+	void gameLose();
 };
