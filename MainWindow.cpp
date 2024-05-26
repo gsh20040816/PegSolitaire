@@ -63,10 +63,9 @@ void startGame()
 			choice = getch();
 		}
 		if (choice == '3')break;
-		else
+		else if (choice == '1')
 		{
-			string filename = "Rounds/" + to_string(choice-'0') + ".txt";
-			
+			string filename = "Rounds/1.txt";
 			ifstream fin;
 			fin.open(filename);
 			vector<pair<int, string>>rounds;
@@ -75,7 +74,6 @@ void startGame()
 			while (fin >> roundID >> roundDesription)
 				rounds.push_back(make_pair(roundID, roundDesription));
 			fin.close();
-			//让用户选择关卡
 			cleardevice();
 			setfont(45, 0, "黑体");
 			setcolor(WHITE);
@@ -83,7 +81,7 @@ void startGame()
 			for (int i = 0; i < rounds.size(); i++)
 			{
 				char msg[100];
-				sprintf_s(msg, 100, "%d0[%d].%s", choice, rounds[i].first % 100, rounds[i].second.c_str());
+				sprintf_s(msg, 100, "%d.%s", rounds[i].first % 100, rounds[i].second.c_str());
 				outtextxy(150, 200 + i * 80, msg);
 			}
 			outtextxy(150, 200 + rounds.size() * 80, "7.返回上一级");
@@ -92,6 +90,52 @@ void startGame()
 			while (choice<'1' || choice>rounds.size() + '0')
 				choice = getch();
 			startRound(rounds[choice - '0' - 1].first);
+		}
+		else
+		{
+			string filename = "Rounds/2.txt";
+			ifstream fin;
+			fin.open(filename);
+			vector<pair<int, string>>rounds;
+			int roundID = 0;
+			string roundDesription;
+			while (fin >> roundID >> roundDesription)
+				rounds.push_back(make_pair(roundID, roundDesription));
+			fin.close();
+			cleardevice();
+			setfont(40, 0, "黑体");
+			setcolor(WHITE);
+			char msg[100];
+			sprintf_s(msg, 100, "共有%d个残局", rounds.size());
+			outtextxy(100, 100, msg);
+			outtextxy(100, 200, "请输入残局编号（三位数）");
+			outtextxy(100, 300, "输入000返回上一级");
+			int choice1 = getch();
+			while (choice1 < '0' || choice1>'9')
+				choice1 = getch();
+			int choice2 = getch();
+			while (choice2 < '0' || choice2>'9')
+				choice2 = getch();
+			int choice3 = getch();
+			while (choice3 < '0' || choice3>'9')
+				choice3 = getch();
+			int choice = (choice1 - '0') * 100 + (choice2 - '0') * 10 + choice3 - '0';
+			while (choice > rounds.size())
+			{
+				outtextxy(100, 400, "该残局不存在，请重新输入");
+				choice1 = getch();
+				while (choice1 < '0' || choice1>'9')
+					choice1 = getch();
+				choice2 = getch();
+				while (choice2 < '0' || choice2>'9')
+					choice2 = getch();
+				choice3 = getch();
+				while (choice3 < '0' || choice3>'9')
+					choice3 = getch();
+				choice = (choice1 - '0') * 100 + (choice2 - '0') * 10 + choice3 - '0';
+			}
+			if (choice == 0)continue;
+			startRound(choice + 200);
 		}
 	}
 }
