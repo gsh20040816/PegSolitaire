@@ -148,6 +148,7 @@
     <Text Include="Rounds\104.txt" />
     <Text Include="Rounds\105.txt" />
     <Text Include="Rounds\106.txt" />
+    <Text Include="Rounds\107.txt" />
     <Text Include="Rounds\2.txt" />
     <Text Include="Rounds\201.txt" />
   </ItemGroup>

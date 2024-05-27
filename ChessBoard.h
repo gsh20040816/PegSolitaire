@@ -13,6 +13,8 @@ private:
 	int boardSize, width, height;
 	//0:空 1:非空 -1:不可达
 	int board[size][size];
+	int posX[size][size], posY[size][size];
+	int radius;
 	//检查方向是否合法，以及判断下一步是哪个方向
 	//type:0
 	//0:左 1:上 2:右 3:下

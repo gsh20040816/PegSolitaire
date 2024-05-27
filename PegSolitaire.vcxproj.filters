@@ -64,5 +64,8 @@
     <Text Include="Rounds\201.txt">
       <Filter>资源文件\Rounds</Filter>
     </Text>
+    <Text Include="Rounds\107.txt">
+      <Filter>资源文件\Rounds</Filter>
+    </Text>
   </ItemGroup>
 </Project>

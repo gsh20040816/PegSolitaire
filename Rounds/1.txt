@@ -4,3 +4,4 @@
 104 Asymmetric
 105 German
 106 Diamond
+107 Star
