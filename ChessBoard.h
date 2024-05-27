@@ -10,7 +10,7 @@ private:
 	//六边形棋盘使用偏移的二维数组存储
 	int type;
 	const static int size = 20;
-	int boardSize, width, height;
+	int row, col, width, height;
 	//0:空 1:非空 -1:不可达
 	int board[size][size];
 	int posX[size][size], posY[size][size];

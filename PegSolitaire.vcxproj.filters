@@ -67,5 +67,23 @@
     <Text Include="Rounds\107.txt">
       <Filter>资源文件\Rounds</Filter>
     </Text>
+    <Text Include="Rounds\108.txt">
+      <Filter>资源文件\Rounds</Filter>
+    </Text>
+    <Text Include="Rounds\109.txt">
+      <Filter>资源文件\Rounds</Filter>
+    </Text>
+    <Text Include="Rounds\110.txt">
+      <Filter>资源文件\Rounds</Filter>
+    </Text>
+    <Text Include="Rounds\111.txt">
+      <Filter>资源文件\Rounds</Filter>
+    </Text>
+    <Text Include="Rounds\112.txt">
+      <Filter>资源文件\Rounds</Filter>
+    </Text>
+    <Text Include="Rounds\113.txt">
+      <Filter>资源文件\Rounds</Filter>
+    </Text>
   </ItemGroup>
 </Project>

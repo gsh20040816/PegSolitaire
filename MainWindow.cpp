@@ -81,15 +81,15 @@ void startGame()
 			for (int i = 0; i < rounds.size(); i++)
 			{
 				char msg[100];
-				sprintf_s(msg, 100, "%d.%s", rounds[i].first % 100, rounds[i].second.c_str());
-				outtextxy(150, 200 + i * 80, msg);
+				sprintf_s(msg, 100, "%c.%s", rounds[i].first % 100 < 10 ? rounds[i].first % 100 + '0' : rounds[i].first % 100 - 10 + 'a', rounds[i].second.c_str());
+				outtextxy(150, 200 + i * 40, msg);
 			}
-			outtextxy(150, 200 + rounds.size() * 80, "8.返回上一级");
+			outtextxy(150, 200 + rounds.size() * 40, "e.返回上一级");
 			int choice = getch();
-			if (choice == '8')continue;
-			while (choice<'1' || choice>rounds.size() + '0')
+			if (choice == 'e')continue;
+			while ((choice < '1' || choice>'9') && (choice < 'a' || choice>'d'))
 				choice = getch();
-			startRound(rounds[choice - '0' - 1].first);
+			startRound(rounds[choice >= '1' && choice <= '9' ? choice - '0' - 1 : choice - 'a' + 9].first);
 		}
 		else
 		{

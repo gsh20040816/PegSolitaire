@@ -12,26 +12,24 @@ chessBoard::chessBoard(int type, int width, int height)
 	fin.open(filename);
 	this->width = width;
 	this->height = height;
-	fin >> this->boardSize >> this->type;
-	for (int i = 0; i < this->size; i++)
-		for (int j = 0; j < this->size; j++)
+	fin >> row >> col >> this->type;
+	for (int i = 0; i < size; i++)
+		for (int j = 0; j < size; j++)
 			board[i][j] = -1;
-	for (int i = 0; i < this->boardSize; i++)
-		for (int j = 0; j < this->boardSize; j++)
+	for (int i = 0; i < row; i++)
+		for (int j = 0; j < col - (this->type == 1 && i % 2 == 0); j++)
 			fin >> board[i][j];
-	for (int i = 0; i < this->boardSize; i++)
-	{
-		for (int j = 0; j < this->boardSize; j++)
+	for (int i = 0; i < row; i++)
+		for (int j = 0; j < col - (this->type == 1 && i % 2 == 0); j++)
 		{
-			int x = width / (boardSize + 1) * j + width / (boardSize + 1) / 2;
-			int y = height - width + width / boardSize * i + width / boardSize / 2;
+			int x = width / col * j + width / col / 2;
+			int y = height - width + width / row * i + width / row / 2;
 			if (this->type == 1 && i % 2 == 0)
-				x += width / (boardSize + 1) / 2;
+				x += width / col / 2;
 			posX[i][j] = x;
 			posY[i][j] = y;
 		}
-	}
-	radius = width / boardSize / 3;
+	radius = width / max(row, col) / 3;
 }
 
 chessBoard::~chessBoard()
@@ -45,8 +43,8 @@ void chessBoard::printBoard()
 
 	setfont(45, 0, "黑体");
 	outtextxy(150, 50, "欢迎来到孔明棋");
-	for (int i = 0; i < boardSize; i++)
-		for (int j = 0; j < boardSize; j++)
+	for (int i = 0; i < row; i++)
+		for (int j = 0; j < col - (type == 1 && i % 2 == 0); j++)
 			if (board[i][j] != -1)
 			{
 				if (board[i][j] == 1)
@@ -58,8 +56,8 @@ void chessBoard::printBoard()
 
 bool chessBoard::moveChess(int startX, int startY, int endX, int endY)
 {
-	if (startX < 0 || startX >= boardSize || startY < 0 || startY >= boardSize)return false;
-	if (endX < 0 || endX >= boardSize || endY < 0 || endY >= boardSize)return false;
+	if (startX < 0 || startX >= row || startY < 0 || startY >= col - (type == 1 && startX % 2 == 0))return false;
+	if (endX < 0 || endX >= row || endY < 0 || endY >= col - (type == 1 && endX % 2 == 0))return false;
 	if (board[startX][startY] != 1 || board[endX][endY] != 0)return false;
 	int direction = checkDirection(startX, startY, endX, endY);
 	if (direction == -1)return false;
@@ -127,9 +125,9 @@ pair<pair<int, int>, pair<int, int>>chessBoard::getMouseMove()
 		msg = getmouse();
 	pair<int, int>end = make_pair(msg.x, msg.y);
 	int startX = -1, startY = -1, endX = -1, endY = -1;
-	for (int i = 0; i < boardSize; i++)
+	for (int i = 0; i < row; i++)
 	{
-		for (int j = 0; j < boardSize; j++)
+		for (int j = 0; j < col - (type == 1 && i % 2 == 0); j++)
 		{
 			if ((start.first - posX[i][j]) * (start.first - posX[i][j]) + (start.second - posY[i][j]) * (start.second - posY[i][j]) <= radius * radius)
 			{
@@ -140,9 +138,9 @@ pair<pair<int, int>, pair<int, int>>chessBoard::getMouseMove()
 		}
 		if (startX != -1)break;
 	}
-	for (int i = 0; i < boardSize; i++)
+	for (int i = 0; i < row; i++)
 	{
-		for (int j = 0; j < boardSize; j++)
+		for (int j = 0; j < col - (type == 1 && i % 2 == 0); j++)
 		{
 			if ((end.first - posX[i][j]) * (end.first - posX[i][j]) + (end.second - posY[i][j]) * (end.second - posY[i][j]) <= radius * radius)
 			{
@@ -159,21 +157,21 @@ pair<pair<int, int>, pair<int, int>>chessBoard::getMouseMove()
 int chessBoard::gameEnd()
 {
 	int num = 0;
-	for (int i = 0; i < boardSize; i++)
-		for (int j = 0; j < boardSize; j++)
+	for (int i = 0; i < row; i++)
+		for (int j = 0; j < col - (type == 1 && i % 2 == 0); j++)
 			if (board[i][j] == 1)
 				num++;
-	for (int i = 0; i < boardSize; i++)
-		for (int j = 0; j < boardSize; j++)
+	for (int i = 0; i < row; i++)
+		for (int j = 0; j < col - (type == 1 && i % 2 == 0); j++)
 			if (board[i][j] == 0)
 				for (int direction = 0; direction < (type == 0 ? 4 : 6); direction++)
 				{
 					auto midPlace = getNextPlace(i, j, direction);
 					int midX = midPlace.first, midY = midPlace.second;
-					if (midX < 0 || midX >= boardSize || midY < 0 || midY >= boardSize)continue;
+					if (midX < 0 || midX >= row || midY < 0 || midY >= col - (type == 1 && midX % 2 == 0))continue;
 					auto endPlace = getNextPlace(midX, midY, direction);
 					int endX = endPlace.first, endY = endPlace.second;
-					if (endX < 0 || endX >= boardSize || endY < 0 || endY >= boardSize)continue;
+					if (endX < 0 || endX >= row || endY < 0 || endY >= col - (type == 1 && endX % 2 == 0))continue;
 					if (board[midX][midY] == 1 && board[endX][endY] == 1)
 						return -1;
 				}

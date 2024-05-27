@@ -5,3 +5,9 @@
 105 German
 106 Diamond
 107 Star
+108 Pyramid
+109 Trapezoid
+110 Rhombus
+111 Triangle
+112 Snowflake
+113 Hexagonal
