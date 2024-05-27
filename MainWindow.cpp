@@ -43,6 +43,7 @@ void initBoard()
 	const color_t backColor = BLUE;
 	initgraph(width, height);
 	setbkcolor(backColor);
+	setcaption("孔明棋");
 }
 
 void startGame()
