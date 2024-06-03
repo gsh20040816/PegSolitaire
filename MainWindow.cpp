@@ -111,11 +111,10 @@ void startGame()
 			string filename = "Rounds/2.txt";
 			ifstream fin;
 			fin.open(filename);
-			vector<pair<int, string>>rounds;
+			vector<int>rounds;
 			int roundID = 0;
-			string roundDesription;
-			while (fin >> roundID >> roundDesription)
-				rounds.push_back(make_pair(roundID, roundDesription));
+			while (fin >> roundID)
+				rounds.push_back(roundID);
 			fin.close();
 			cleardevice();
 			setfont(40, 0, "黑体");

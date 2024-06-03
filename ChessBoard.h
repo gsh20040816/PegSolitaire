@@ -19,6 +19,7 @@ private:
 	//悔棋
 	int undoX, undoY, undoR;
 	int exitX, exitY, exitR;
+	int numX, numY, numR;
 	//记录上一步操作的位置和方向
 	int preX, preY, preDirection;
 	//检查方向是否合法，以及判断下一步是哪个方向
@@ -28,6 +29,7 @@ private:
 	//0:左 1:左上 2:右上 3:右 4:右下 5:左下
 	int checkDirection(int startX, int startY, int endX, int endY);
 	pair<int, int>getNextPlace(int startX, int startY, int direction);
+	int getLeftNum();
 
 public:
 	chessBoard(int type, int width, int height);

@@ -22,6 +22,9 @@ chessBoard::chessBoard(int type, int width, int height)
 	exitX = (height - width) / 2;
 	exitY = (height - width) / 2;
 	exitR = (height - width) / 4;
+	numX = width / 2;
+	numY = (height - width) / 2;
+	numR = (height - width) / 4;
 	preDirection = -1;
 	preX = preY = -1;
 	for (int i = 0; i < row; i++)
@@ -54,9 +57,11 @@ void chessBoard::printBoard()
 	settextjustify(CENTER_TEXT, CENTER_TEXT);
 	outtextxy(undoX, undoY, "悔棋");
 	outtextxy(exitX, exitY, "退出");
+	outtextxy(numX, numY, to_string(getLeftNum()).c_str());
 	settextjustify(LEFT_TEXT, LEFT_TEXT);
 	circle(undoX, undoY, undoR);
 	circle(exitX, exitY, exitR);
+	circle(numX, numY, numR);
 	for (int i = 0; i < row; i++)
 		for (int j = 0; j < col - (type == 1 && i % 2 == 0); j++)
 			if (board[i][j] != -1)
@@ -187,13 +192,19 @@ pair<pair<int, int>, pair<int, int>>chessBoard::getMouseMove()
 	return make_pair(make_pair(startX, startY), make_pair(endX, endY));
 }
 
-int chessBoard::gameEnd()
+int chessBoard::getLeftNum()
 {
 	int num = 0;
 	for (int i = 0; i < row; i++)
 		for (int j = 0; j < col - (type == 1 && i % 2 == 0); j++)
 			if (board[i][j] == 1)
 				num++;
+	return num;
+}
+
+int chessBoard::gameEnd()
+{
+	int num = getLeftNum();
 	for (int i = 0; i < row; i++)
 		for (int j = 0; j < col - (type == 1 && i % 2 == 0); j++)
 			if (board[i][j] == 0)
