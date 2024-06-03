@@ -19,7 +19,21 @@ void startRound(int roundID)
 		auto move = board.getMouseMove();
 		int startX = move.first.first, startY = move.first.second;
 		int endX = move.second.first, endY = move.second.second;
-		if (board.moveChess(startX, startY, endX, endY))
+		if (startX == -2 && endX == -2)
+		{
+			if (board.undo())
+			{
+				cleardevice();
+				board.printBoard();
+			}
+		}
+		else if (startX == -3 && endX == -3)
+		{
+			cleardevice();
+			board.gameOver((char*)"你退出了游戏！按空格返回初始界面");
+			break;
+		}
+		else if (board.moveChess(startX, startY, endX, endY))
 		{
 			cleardevice();
 			board.printBoard();

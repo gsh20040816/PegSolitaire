@@ -13,8 +13,14 @@ private:
 	int row, col, width, height;
 	//0:空 1:非空 -1:不可达
 	int board[size][size];
+	//图形界面坐标
 	int posX[size][size], posY[size][size];
 	int radius;
+	//悔棋
+	int undoX, undoY, undoR;
+	int exitX, exitY, exitR;
+	//记录上一步操作的位置和方向
+	int preX, preY, preDirection;
 	//检查方向是否合法，以及判断下一步是哪个方向
 	//type:0
 	//0:左 1:上 2:右 3:下
@@ -28,6 +34,7 @@ public:
 	~chessBoard();
 	void printBoard();//打印棋盘
 	bool moveChess(int startX, int startY, int endX, int endY);//移动棋子并判断是否合法
+	bool undo();//悔棋
 	pair<pair<int, int>,pair<int,int>>getMouseMove();//获取鼠标移动棋子信息
 	int gameEnd();//判断游戏是否结束，未结束返回-1，结束返回剩余棋子数
 	void gameOver(char* msg);

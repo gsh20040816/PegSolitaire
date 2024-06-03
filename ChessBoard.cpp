@@ -16,6 +16,14 @@ chessBoard::chessBoard(int type, int width, int height)
 	for (int i = 0; i < size; i++)
 		for (int j = 0; j < size; j++)
 			board[i][j] = -1;
+	undoX = width - (height - width) / 2;
+	undoY = (height - width) / 2;
+	undoR = (height - width) / 4;
+	exitX = (height - width) / 2;
+	exitY = (height - width) / 2;
+	exitR = (height - width) / 4;
+	preDirection = -1;
+	preX = preY = -1;
 	for (int i = 0; i < row; i++)
 		for (int j = 0; j < col - (this->type == 1 && i % 2 == 0); j++)
 			fin >> board[i][j];
@@ -42,7 +50,13 @@ void chessBoard::printBoard()
 	const int textWidth = width / 2, textHeight = (height - width) / 2;
 
 	setfont(45, 0, "黑体");
-	outtextxy(150, 50, "欢迎来到孔明棋");
+	setcolor(WHITE);
+	settextjustify(CENTER_TEXT, CENTER_TEXT);
+	outtextxy(undoX, undoY, "悔棋");
+	outtextxy(exitX, exitY, "退出");
+	settextjustify(LEFT_TEXT, LEFT_TEXT);
+	circle(undoX, undoY, undoR);
+	circle(exitX, exitY, exitR);
 	for (int i = 0; i < row; i++)
 		for (int j = 0; j < col - (type == 1 && i % 2 == 0); j++)
 			if (board[i][j] != -1)
@@ -67,6 +81,9 @@ bool chessBoard::moveChess(int startX, int startY, int endX, int endY)
 	board[startX][startY] = 0;
 	board[midX][midY] = 0;
 	board[endX][endY] = 1;
+	preDirection = direction;
+	preX = endX;
+	preY = endY;
 	return true;
 }
 
@@ -121,7 +138,7 @@ pair<pair<int, int>, pair<int, int>>chessBoard::getMouseMove()
 	while (!msg.is_left() || !msg.is_down())
 		msg = getmouse();
 	pair<int, int>start = make_pair(msg.x, msg.y);
-	while(!msg.is_up())
+	while (!msg.is_up())
 		msg = getmouse();
 	pair<int, int>end = make_pair(msg.x, msg.y);
 	int startX = -1, startY = -1, endX = -1, endY = -1;
@@ -138,6 +155,14 @@ pair<pair<int, int>, pair<int, int>>chessBoard::getMouseMove()
 		}
 		if (startX != -1)break;
 	}
+	if ((start.first - undoX) * (start.first - undoX) + (start.second - undoY) * (start.second - undoY) <= undoR * undoR)
+	{
+		startX = -2, startY = -2;
+	}
+	if ((start.first - exitX) * (start.first - exitX) + (start.second - exitY) * (start.second - exitY) <= exitR * exitR)
+	{
+		startX = -3, startY = -3;
+	}
 	for (int i = 0; i < row; i++)
 	{
 		for (int j = 0; j < col - (type == 1 && i % 2 == 0); j++)
@@ -150,6 +175,14 @@ pair<pair<int, int>, pair<int, int>>chessBoard::getMouseMove()
 			}
 		}
 		if (endX != -1)break;
+	}
+	if ((end.first - undoX) * (end.first - undoX) + (end.second - undoY) * (end.second - undoY) <= undoR * undoR)
+	{
+		endX = -2, endY = -2;
+	}
+	if ((end.first - exitX) * (end.first - exitX) + (end.second - exitY) * (end.second - exitY) <= exitR * exitR)
+	{
+		endX = -3, endY = -3;
 	}
 	return make_pair(make_pair(startX, startY), make_pair(endX, endY));
 }
@@ -182,6 +215,22 @@ void chessBoard::gameOver(char* msg)
 {
 	const color_t backColor = GREEN;
 	setbkcolor(backColor);
-	setfont(45, 0, "黑体");
+	setfont(35, 0, "黑体");
 	outtextxy(0, height/3, msg);
+}
+
+bool chessBoard::undo()
+{
+	if (preDirection == -1)return false;//没有上一步操作或已经悔过棋
+	int direction = type == 0 ? (preDirection + 2) % 4 : (preDirection + 3) % 6;
+	auto midPlace = getNextPlace(preX, preY, direction);
+	int midX = midPlace.first, midY = midPlace.second;
+	auto startPlace = getNextPlace(midX, midY, direction);
+	int startX = startPlace.first, startY = startPlace.second;
+	board[startX][startY] = 1;
+	board[midX][midY] = 1;
+	board[preX][preY] = 0;
+	preDirection = -1;
+	preX = preY = -1;
+	return true;
 }
