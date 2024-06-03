@@ -37,52 +37,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Rounds\101.txt">
-      <Filter>资源文件\Rounds</Filter>
-    </Text>
     <Text Include="Rounds\1.txt">
       <Filter>资源文件\Rounds</Filter>
     </Text>
-    <Text Include="Rounds\102.txt">
-      <Filter>资源文件\Rounds</Filter>
-    </Text>
-    <Text Include="Rounds\103.txt">
-      <Filter>资源文件\Rounds</Filter>
-    </Text>
-    <Text Include="Rounds\104.txt">
-      <Filter>资源文件\Rounds</Filter>
-    </Text>
-    <Text Include="Rounds\105.txt">
-      <Filter>资源文件\Rounds</Filter>
-    </Text>
-    <Text Include="Rounds\106.txt">
-      <Filter>资源文件\Rounds</Filter>
-    </Text>
     <Text Include="Rounds\2.txt">
-      <Filter>资源文件\Rounds</Filter>
-    </Text>
-    <Text Include="Rounds\201.txt">
-      <Filter>资源文件\Rounds</Filter>
-    </Text>
-    <Text Include="Rounds\107.txt">
-      <Filter>资源文件\Rounds</Filter>
-    </Text>
-    <Text Include="Rounds\108.txt">
-      <Filter>资源文件\Rounds</Filter>
-    </Text>
-    <Text Include="Rounds\109.txt">
-      <Filter>资源文件\Rounds</Filter>
-    </Text>
-    <Text Include="Rounds\110.txt">
-      <Filter>资源文件\Rounds</Filter>
-    </Text>
-    <Text Include="Rounds\111.txt">
-      <Filter>资源文件\Rounds</Filter>
-    </Text>
-    <Text Include="Rounds\112.txt">
-      <Filter>资源文件\Rounds</Filter>
-    </Text>
-    <Text Include="Rounds\113.txt">
       <Filter>资源文件\Rounds</Filter>
     </Text>
   </ItemGroup>
