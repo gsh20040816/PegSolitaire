@@ -42,4 +42,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: my-built-exe
-        path: ${{env.GITHUB_WORKSPACE}}/x64/${{env.BUILD_CONFIGURATION}}/*.exe
+        path: ${{env.GITHUB_WORKSPACE}}/PegSolitaire/x64/${{env.BUILD_CONFIGURATION}}/*.exe
