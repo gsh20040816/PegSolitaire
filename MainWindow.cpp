@@ -30,7 +30,7 @@ void startRound(int roundID)
 		else if (startX == -3 && endX == -3)
 		{
 			cleardevice();
-			board.gameOver((char*)"你退出了游戏！按空格返回初始界面");
+			board.gameOver((char*)"You exit! Press any key to the main window");
 			break;
 		}
 		else if (board.moveChess(startX, startY, endX, endY))
@@ -43,9 +43,9 @@ void startRound(int roundID)
 		{
 			cleardevice();
 			if (num == 1)
-				board.gameOver((char *)"你赢了！按空格返回初始界面");
+				board.gameOver((char *)"You win! Press any key to the main window");
 			else
-				board.gameOver((char *)"你输了！按空格返回初始界面");
+				board.gameOver((char *)"You lose! Press any key to the main window");
 			break;
 		}
 	}
@@ -57,7 +57,7 @@ void initBoard()
 	const color_t backColor = BLUE;
 	initgraph(width, height);
 	setbkcolor(backColor);
-	setcaption("孔明棋");
+	setcaption("Peg Solitaire");
 }
 
 void startGame()
@@ -65,13 +65,13 @@ void startGame()
 	while (1)
 	{
 		cleardevice();
-		setfont(45, 0, "黑体");
+		setfont(45, 0, "Consolas");
 		setcolor(WHITE);
 		setbkcolor(BLUE);
-		outtextxy(100, 200, "请按键选择");
-		outtextxy(150, 300, "1.完整棋局");
-		outtextxy(150, 400, "2.残局");
-		outtextxy(150, 500, "3.退出");
+		outtextxy(100, 200, "Press [1-3] to choose");
+		outtextxy(150, 300, "1.Fullgame");
+		outtextxy(150, 400, "2.Endgame");
+		outtextxy(150, 500, "3.Exit");
 		int choice = getch();
 		while (choice != '1' && choice != '2' && choice != '3')
 		{
@@ -90,16 +90,16 @@ void startGame()
 				rounds.push_back(make_pair(roundID, roundDesription));
 			fin.close();
 			cleardevice();
-			setfont(45, 0, "黑体");
+			setfont(45, 0, "Consolas");
 			setcolor(WHITE);
-			outtextxy(100, 100, "请按键选择");
+			outtextxy(100, 100, "Press key to choose");
 			for (int i = 0; i < rounds.size(); i++)
 			{
 				char msg[100];
 				sprintf_s(msg, 100, "%c.%s", rounds[i].first % 100 < 10 ? rounds[i].first % 100 + '0' : rounds[i].first % 100 - 10 + 'a', rounds[i].second.c_str());
 				outtextxy(150, 200 + i * 40, msg);
 			}
-			outtextxy(150, 200 + rounds.size() * 40, "e.返回上一级");
+			outtextxy(150, 200 + rounds.size() * 40, "e.Return");
 			int choice = getch();
 			if (choice == 'e')continue;
 			while ((choice < '1' || choice>'9') && (choice < 'a' || choice>'d'))
@@ -117,13 +117,14 @@ void startGame()
 				rounds.push_back(roundID);
 			fin.close();
 			cleardevice();
-			setfont(40, 0, "黑体");
+			setfont(36, 0, "Consolas");
 			setcolor(WHITE);
 			char msg[100];
-			sprintf_s(msg, 100, "共有%d个残局", int(rounds.size()));
+			sprintf_s(msg, 100, "There are %d endgames", int(rounds.size()));
 			outtextxy(100, 100, msg);
-			outtextxy(100, 200, "请输入残局编号（三位数）");
-			outtextxy(100, 300, "输入000返回上一级");
+			outtextxy(100, 150, "Input the endgame number");
+			outtextxy(100, 200, "(Three Digits such as \"001\")");
+			outtextxy(100, 250, "Input \"000\" to return");
 			int choice1 = getch();
 			while (choice1 < '0' || choice1>'9')
 				choice1 = getch();
@@ -136,7 +137,7 @@ void startGame()
 			int choice = (choice1 - '0') * 100 + (choice2 - '0') * 10 + choice3 - '0';
 			while (choice > rounds.size())
 			{
-				outtextxy(100, 400, "该残局不存在，请重新输入");
+				outtextxy(100, 400, "Not available");
 				choice1 = getch();
 				while (choice1 < '0' || choice1>'9')
 					choice1 = getch();

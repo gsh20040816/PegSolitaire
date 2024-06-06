@@ -52,11 +52,11 @@ void chessBoard::printBoard()
 	const int textX = width / 4, textY = (height - width) / 4;
 	const int textWidth = width / 2, textHeight = (height - width) / 2;
 
-	setfont(45, 0, "黑体");
+	setfont(45, 0, "Consolas");
 	setcolor(WHITE);
 	settextjustify(CENTER_TEXT, CENTER_TEXT);
-	outtextxy(undoX, undoY, "悔棋");
-	outtextxy(exitX, exitY, "退出");
+	outtextxy(undoX, undoY, "Undo");
+	outtextxy(exitX, exitY, "Exit");
 	outtextxy(numX, numY, to_string(getLeftNum()).c_str());
 	settextjustify(LEFT_TEXT, LEFT_TEXT);
 	circle(undoX, undoY, undoR);
@@ -226,7 +226,7 @@ void chessBoard::gameOver(char* msg)
 {
 	const color_t backColor = GREEN;
 	setbkcolor(backColor);
-	setfont(35, 0, "黑体");
+	setfont(30, 0, "Consolas");
 	outtextxy(0, height/3, msg);
 }
 
